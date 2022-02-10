@@ -1,0 +1,7 @@
+logfile: 'coreruleset-3.4-dev/tests/logs/modsec2-apache/error.log'
+logtype:
+  name: 'apache'
+  timeregex:  '\[([A-Z][a-z]{2} [A-z][a-z]{2} \d{1,2} \d{1,2}\:\d{1,2}\:\d{1,2}\.\d+? \d{4})\]'
+  timeformat: 'ddd MMM DD HH:mm:ss.S YYYY'
+
+logtruncate: True
