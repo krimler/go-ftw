@@ -214,6 +214,17 @@ func checkResult(c *check.FTWCheck, id string, response *http.Response, response
 				log.Debug().Msgf("ftw/check: found response Headers content has \"%s\"", dump)
 				result = Success
 			}
+
+			// Check response Or Headers does for NO match
+			if c.AssertNoResponseOrHeadersContains(response.GetBodyAsString(), string(dump)) {
+				log.Debug().Msgf("ftw/check: found response or headers content has \"%s\"", dump)
+				result = Success
+			}
+			// Check response Headers for NO match
+			if c.AssertNoResponseHeadersContains(string(dump)) {
+				log.Debug().Msgf("ftw/check: found response Headers content has \"%s\"", dump)
+				result = Success
+			}
 		}
 		// Lastly, check logs
 		if c.AssertLogContains() {

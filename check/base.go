@@ -69,6 +69,16 @@ func (c *FTWCheck) SetExpectResponseOrHeaders(response string) {
 	c.expected.ResponseOrHeadersContains = response
 }
 
+// SetExpectNoResponseHeaders sets the response we expect in the text from the server
+func (c *FTWCheck) SetExpectNoResponseHeaders(response string) {
+	c.expected.NoResponseHeadersContains = response
+}
+
+// SetExpectNoResponseOrHeaders sets the response we expect in the text from the server
+func (c *FTWCheck) SetExpectNoResponseOrHeaders(response string) {
+	c.expected.NoResponseOrHeadersContains = response
+}
+
 // SetExpectError sets the boolean if we are expecting an error from the server
 func (c *FTWCheck) SetExpectError(expect bool) {
 	c.expected.ExpectError = expect

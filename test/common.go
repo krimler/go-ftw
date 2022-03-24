@@ -21,13 +21,15 @@ type Input struct {
 
 // Output is the response expected from the test
 type Output struct {
-	Status                    []int  `yaml:"status,flow,omitempty"`
-	ResponseContains          string `yaml:"response_contains,omitempty"`
-	ResponseHeadersContains   string `yaml:"response_headers_contains,omitempty"`
-	ResponseOrHeadersContains string `yaml:"response_or_headers_contains,omitempty"`
-	LogContains               string `yaml:"log_contains,omitempty"`
-	NoLogContains             string `yaml:"no_log_contains,omitempty"`
-	ExpectError               bool   `yaml:"expect_error,omitempty"`
+	Status                      []int  `yaml:"status,flow,omitempty"`
+	ResponseContains            string `yaml:"response_contains,omitempty"`
+	ResponseHeadersContains     string `yaml:"response_headers_contains,omitempty"`
+	ResponseOrHeadersContains   string `yaml:"response_or_headers_contains,omitempty"`
+	NoResponseHeadersContains   string `yaml:"no_response_headers_contains,omitempty"`
+	NoResponseOrHeadersContains string `yaml:"no_response_or_headers_contains,omitempty"`
+	LogContains                 string `yaml:"log_contains,omitempty"`
+	NoLogContains               string `yaml:"no_log_contains,omitempty"`
+	ExpectError                 bool   `yaml:"expect_error,omitempty"`
 }
 
 // Test is an individual test
