@@ -1,14 +1,15 @@
 package runner
 
 import (
-	"regexp"
-	"time"
-
+	"fmt"
 	"github.com/fzipi/go-ftw/check"
 	"github.com/fzipi/go-ftw/config"
 	"github.com/fzipi/go-ftw/http"
 	"github.com/fzipi/go-ftw/test"
 	"github.com/fzipi/go-ftw/utils"
+	"net/http/httputil"
+	"regexp"
+	"time"
 
 	"github.com/kyokomi/emoji"
 	"github.com/rs/zerolog/log"
@@ -197,6 +198,22 @@ func checkResult(c *check.FTWCheck, id string, response *http.Response, response
 		if c.AssertResponseContains(response.GetBodyAsString()) {
 			log.Debug().Msgf("ftw/check: found response content has \"%s\"", response.GetBodyAsString())
 			result = Success
+		}
+		dump, err := httputil.DumpResponse(&(response.Parsed), false /* only headers */)
+		if err != nil {
+			log.Error().Msgf("ftw/check: error occured while taking response header Dump:")
+			fmt.Println(err)
+		} else {
+			// Check response Or Headers
+			if c.AssertResponseOrHeadersContains(response.GetBodyAsString(), string(dump)) {
+				log.Debug().Msgf("ftw/check: found response or headers content has \"%s\"", dump)
+				result = Success
+			}
+			// Check response Headers
+			if c.AssertResponseHeadersContains(string(dump)) {
+				log.Debug().Msgf("ftw/check: found response Headers content has \"%s\"", dump)
+				result = Success
+			}
 		}
 		// Lastly, check logs
 		if c.AssertLogContains() {
