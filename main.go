@@ -22,8 +22,16 @@ var (
 )
 
 func main() {
-	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
+	const file_name string = "ftw.log"
+	file, err := os.Create(file_name)
+	if err != nil {
+		fmt.Println("Critical: Invalid Log filei: ", file_name)
+	}
+	defer file.Close()
 
+	//log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
+
+	log.Logger = log.Output(file)
 	zerolog.TimeFieldFormat = zerolog.TimeFormatUnix
 	// Default level for this example is info, unless debug flag is present
 	zerolog.SetGlobalLevel(zerolog.InfoLevel)
