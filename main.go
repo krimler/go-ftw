@@ -29,8 +29,6 @@ func main() {
 	}
 	defer file.Close()
 
-	//log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
-
 	log.Logger = log.Output(file)
 	zerolog.TimeFieldFormat = zerolog.TimeFormatUnix
 	// Default level for this example is info, unless debug flag is present
